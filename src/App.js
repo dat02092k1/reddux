@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import Header from "./components/Header/Header";
+import EditPage from "./components/Edit/EditPage";
+import { useSelector } from "react-redux";
 
 function App() {
+  const [isEdit, setEdit] = useState(false);
+  const loading = useSelector((state) => state.user.loading);
+  const error = useSelector((state) => state.user.error);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="App">
+        {isEdit ? <EditPage setEdit={setEdit} /> : <Header setEdit={setEdit} />}
+        {loading && <p className="loading">Loading...</p>}
+        {!isEdit && error && (
+          <p className="error">Error on fetching data from server</p>
+        )}
+      </div>
+    </>
   );
 }
 
