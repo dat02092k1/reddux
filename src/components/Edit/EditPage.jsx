@@ -3,15 +3,12 @@ import './Edit.css';
 import Input from '../InputFields/Input';
 import { useDispatch, useSelector } from 'react-redux';
 import {updateUser}  from '../../redux/apiRequest';
+import { listContainer } from '../../utils/listContainers';
 
 export default function EditPage(props) {
     const {setEdit} = props; 
 
-    const avaUrl = [
-        "https://preview.redd.it/rrz3hmsxcll71.png?width=640&crop=smart&auto=webp&s=87cc5ed38d8f088ef9fffef7a4c5756b64309d6a",
-        'https://preview.redd.it/rrz3hmsxcll71.png?width=640&crop=smart&auto=webp&s=87cc5ed38d8f088ef9fffef7a4c5756b64309d6a',
-        'https://preview.redd.it/rrz3hmsxcll71.png?width=640&crop=smart&auto=webp&s=87cc5ed38d8f088ef9fffef7a4c5756b64309d6a'
-    ]
+    const avaUrl = listContainer.avaUrl;
 
     const user = useSelector((state) => state.user); 
     const dispatch =  useDispatch()

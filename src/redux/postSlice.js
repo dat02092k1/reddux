@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const userSlice = createSlice({
+export const postSlide = createSlice({
   name: "post",
   initialState: {
     posts: [
@@ -10,6 +10,7 @@ export const userSlice = createSlice({
         tag: 0,
       },
     ],
+    
     loading: false,
     error: false,
   },
@@ -27,5 +28,5 @@ export const userSlice = createSlice({
   },
 });
 
-export const { updateStart, updateError, updateSuccess } = userSlice.actions;
-export default userSlice.reducer;
+export const { createPost } = postSlide.actions;
+export default postSlide.reducer;

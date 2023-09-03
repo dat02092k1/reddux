@@ -5,6 +5,7 @@ import EditPage from "./components/Edit/EditPage";
 import { useSelector } from "react-redux";
 import Footer from "./components/Footer/Footer";
 import PostForm from "./components/Post/PostForm";
+import Post from "./components/Post/Post";
 
 function App() {
   const [isEdit, setEdit] = useState(false);
@@ -15,13 +16,29 @@ function App() {
   return (
     <>
       <div className="App">
-        {isEdit ? <EditPage setEdit={setEdit} /> : <Header setEdit={setEdit} />}
+        {isEdit 
+        ? <EditPage setEdit={setEdit} /> 
+        : !isEdit && !isOpenPost ? (
+          <>
+            <Header setEdit={setEdit} />
+            <div className="post-container">
+              <Post/>
+            </div>
+            <Footer isOpenPost={isOpenPost} setOpen={setOpen} />
+          </>
+        ) : (
+          <>
+            <Header setEdit={setEdit} />
+            <PostForm setOpen={setOpen} />
+          </>
+        )}
+        
         {loading && <p className="loading">Loading...</p>}
         {!isEdit && error && (
           <p className="error">Error on fetching data from server</p>
         )}
-        <Footer isOpenPost={isOpenPost} setOpen={setOpen}/>
-        {isOpenPost && <PostForm setOpen={setOpen}/>}
+        <Footer isOpenPost={isOpenPost} setOpen={setOpen} />
+         
       </div>
     </>
   );

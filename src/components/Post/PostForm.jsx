@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import Input from "../InputFields/Input";
 import "./Post.css";
+import { useDispatch } from "react-redux";
+import { createPost } from "../../redux/postSlice";
+import { listContainer } from "../../utils/listContainers";
 export default function PostForm(props) {
   const {setOpen} = props;
   const [title, setTitle] = useState("Add a title");
   const [description, setDescription] = useState("Add some description");
   const [selectedIdx, setSelectedIdx] = useState(0);
 
-  const tags = ["None", "NSFW", "Mood", "Quotes", "Shitpost"];
-
+  const tags = listContainer.tags;
+  const dispatch = useDispatch();
   const handlePost = () => {
     setOpen(false);
 
@@ -18,7 +21,7 @@ export default function PostForm(props) {
         tag: selectedIdx
     };
 
-    
+    dispatch(createPost(newPost));
   }
   return (
     <>
